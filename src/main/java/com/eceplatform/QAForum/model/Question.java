@@ -1,6 +1,7 @@
 package com.eceplatform.QAForum.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "QUESTION")
@@ -20,6 +21,12 @@ public class Question {
 
     @Column(name = "LIKES", nullable = false)
     private int likes;
+
+    @Column(name = "CREATED_AT", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "MODIFIED_AT", nullable = false)
+    private LocalDateTime modifiedAt;
 
     public int getId() {
         return id;
@@ -51,5 +58,21 @@ public class Question {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 }
