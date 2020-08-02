@@ -11,20 +11,20 @@ import com.eceplatform.QAForum.enums.UserType;
 
 
 @Entity
-@Table(name="User")
+@Table(name="USER")
 public class User {
 
 	@Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "USER_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Column(name = "NAME", nullable = false)
     private String name;
-    @Column
+    @Column(name = "EMAIL", nullable = false)
     private String email;
-    @Column
+    @Column(name = "IMAGE_URL")
     private String imageUrl;
-    @Column
+    @Column(name = "USER_TYPE", nullable = false)
     private UserType userType;
 	public int getId() {
 		return id;
