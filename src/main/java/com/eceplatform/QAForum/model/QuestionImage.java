@@ -1,6 +1,7 @@
 package com.eceplatform.QAForum.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "QUESTION_IMAGE")
@@ -17,6 +18,9 @@ public class QuestionImage {
 
     @Column(name = "S3_KEY", nullable = false)
     private String s3Key;
+
+    @Column(name = "CREATED_AT", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public int getId() {
         return id;
@@ -40,5 +44,13 @@ public class QuestionImage {
 
     public void setS3Key(String s3Key) {
         this.s3Key = s3Key;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

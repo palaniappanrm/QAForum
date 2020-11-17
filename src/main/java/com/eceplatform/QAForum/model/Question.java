@@ -2,6 +2,7 @@ package com.eceplatform.QAForum.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "QUESTION")
@@ -20,13 +21,19 @@ public class Question {
     private User user;
 
     @Column(name = "LIKES", nullable = false)
-    private int likes;
+    private int likes = 0;
 
     @Column(name = "CREATED_AT", nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "MODIFIED_AT", nullable = false)
-    private LocalDateTime modifiedAt;
+    private LocalDateTime modifiedAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Answer> answers;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<QuestionImage> images;
 
     public int getId() {
         return id;
@@ -74,5 +81,21 @@ public class Question {
 
     public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public List<QuestionImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<QuestionImage> images) {
+        this.images = images;
     }
 }

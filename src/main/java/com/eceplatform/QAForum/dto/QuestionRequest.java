@@ -1,11 +1,13 @@
 package com.eceplatform.QAForum.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class QuestionRequest {
 
-    @NotBlank
+    @NotNull(message = "Question text can't be null")
+    @NotBlank(message = "Question text can't be empty")
     private String content;
 
     private List<String> s3ImageKeys;

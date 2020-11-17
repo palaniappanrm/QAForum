@@ -1,10 +1,10 @@
 package com.eceplatform.QAForum.repository;
 
+import com.eceplatform.QAForum.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.eceplatform.QAForum.model.User;
-
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Integer> {
+
 }
