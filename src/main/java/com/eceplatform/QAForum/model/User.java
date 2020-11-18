@@ -4,10 +4,15 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="USER")
+@Table(name = "USER", uniqueConstraints = {
+        @UniqueConstraint(
+                columnNames = {"EMAIL"},
+                name = "UNIQUE_EMAIL"
+        )
+})
 public class User {
 
-	@Id
+    @Id
     @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,31 +20,48 @@ public class User {
     private String name;
     @Column(name = "EMAIL", nullable = false)
     private String email;
-    @Column(name = "IMAGE_URL")
-    private String imageUrl;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getImageUrl() {
-		return imageUrl;
-	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-    
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
+    @Column(name = "ACTIVATED", nullable = false)
+    private boolean active = true;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
