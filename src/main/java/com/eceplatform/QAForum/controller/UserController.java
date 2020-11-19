@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     // register -> get user name, password, email -> validate email and store hash or encrypted password
-    // TODO -> send welcome mail with a link so that the user can click that to activate the account
+    // TODO -> send welcome mail with a link using MailActor so that the user can click that to activate the account
     @PostMapping("/register")
     public ResponseEntity register(@Valid @RequestBody RegisterRequest registerRequest){
         try {
