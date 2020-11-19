@@ -1,6 +1,7 @@
 package com.eceplatform.QAForum.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -22,8 +23,10 @@ public class User {
     private String email;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
-    @Column(name = "ACTIVATED", nullable = false)
-    private boolean active = true;
+    @Column(name = "ACTIVE", nullable = false)
+    private boolean active = false;
+    @Column(name = "CREATED_AT", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public int getId() {
         return id;
@@ -63,5 +66,13 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

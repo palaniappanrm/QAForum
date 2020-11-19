@@ -6,5 +6,7 @@ import com.eceplatform.QAForum.dto.RegisterRequest;
 public interface UserService {
     void register(RegisterRequest registerRequest);
 
-    void login(LoginRequest loginRequest);
+    String login(LoginRequest loginRequest);
+
+    void confirmAccount(String token);
 }
