@@ -41,7 +41,7 @@ public class UserController {
     public ResponseEntity login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response){
         try {
             String jwtToken = userService.login(loginRequest);
-            ResponseCookie cookie = ResponseCookie.from("token", jwtToken).httpOnly(true).maxAge(Duration.ofDays(1)).build();
+            ResponseCookie cookie = ResponseCookie.from("loggedIn_token", jwtToken).httpOnly(true).maxAge(Duration.ofDays(1)).build();
             return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.SET_COOKIE, cookie.toString()).build();
         } catch(ValidationException validationException){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationException.getMessage());

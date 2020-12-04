@@ -10,6 +10,7 @@ import com.eceplatform.QAForum.repository.UserRepository;
 import com.eceplatform.QAForum.repository.UserTokenRepository;
 import com.eceplatform.QAForum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,6 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtill;
+
+    @Autowired
+    @Qualifier("mailActor")
+    private ActorRef mailActor;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
@@ -66,7 +71,7 @@ public class UserServiceImpl implements UserService {
             simpleMailMessage.setSubject("Complete Registration - QA FORUM");
             simpleMailMessage.setText("To confirm your registration, please click on the following link \n" + mailConfirmationLink + userToken.getToken());
             simpleMailMessage.setTo(registerRequest.getEmail());
-            actorConfig.getMailActorRef().tell(simpleMailMessage, ActorRef.noSender());
+            mailActor.tell(simpleMailMessage, ActorRef.noSender());
         }
     }
 

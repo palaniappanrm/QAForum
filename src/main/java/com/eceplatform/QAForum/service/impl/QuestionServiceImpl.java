@@ -1,13 +1,17 @@
 package com.eceplatform.QAForum.service.impl;
 
+import com.eceplatform.QAForum.aop.annotations.LoggedIn;
 import com.eceplatform.QAForum.dto.QuestionRequest;
+import com.eceplatform.QAForum.dto.UserDTO;
 import com.eceplatform.QAForum.model.Question;
 import com.eceplatform.QAForum.model.QuestionImage;
 import com.eceplatform.QAForum.model.User;
 import com.eceplatform.QAForum.repository.QuestionRepository;
 import com.eceplatform.QAForum.repository.UserRepository;
 import com.eceplatform.QAForum.service.QuestionService;
+import com.eceplatform.QAForum.util.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -22,10 +26,15 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    @Qualifier("userThreadLocal")
+    private ThreadLocalUtil<UserDTO> userThreadLocal;
+
     @Override
+    @LoggedIn
     public void addQuestion(QuestionRequest questionRequest) {
 
-        User user = userRepository.findById(1).orElse(null);
+        User user = userRepository.findById(userThreadLocal.getValue().getId()).orElse(null);
 
         if(user != null){
             Question question = new Question();

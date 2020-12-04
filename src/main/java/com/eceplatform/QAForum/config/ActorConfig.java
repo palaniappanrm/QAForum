@@ -3,22 +3,22 @@ package com.eceplatform.QAForum.config;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.eceplatform.QAForum.Actors.MailActor;
+import com.eceplatform.QAForum.actors.MailActor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 public class ActorConfig {
 
-    private ActorRef mailActorRef;
+    private ActorSystem system = ActorSystem.create("QAForumSystem");
 
-    public ActorConfig(@Autowired JavaMailSender javaMailSender){
-        ActorSystem system = ActorSystem.create("TestSystem");
-        mailActorRef = system.actorOf(Props.create(MailActor.class, () -> new MailActor(javaMailSender)), "MailActor");
-    }
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-    public ActorRef getMailActorRef() {
-        return mailActorRef;
+    @Bean("mailActor")
+    public ActorRef createMailActor(){
+        return system.actorOf(Props.create(MailActor.class, () -> new MailActor(javaMailSender)), "MailActor");
     }
 }
