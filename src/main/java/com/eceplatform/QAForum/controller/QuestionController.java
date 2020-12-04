@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 
 @RestController
 @RequestMapping("questions")
@@ -29,6 +30,8 @@ public class QuestionController {
         try {
             questionService.addQuestion(questionRequest);
             return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch(ValidationException validationException){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(validationException.getMessage());
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

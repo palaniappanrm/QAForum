@@ -1,4 +1,4 @@
-package com.eceplatform.QAForum.config;
+package com.eceplatform.QAForum.util;
 
 import com.eceplatform.QAForum.dto.ExceptionMessage;
 import org.springframework.http.HttpStatus;
