@@ -12,9 +12,11 @@ public class QaForumApplication {
 
 /**
  *
- * Threadlocal for logged in user details
+ * Threadlocal for logged in user details - done
  *
- * Get AWS access for s3 image upload
+ * Get RDS MySQL instance - done
+ *
+ * Get AWS access for s3 image upload - done
  *
  * Integrate elastic search to put questions and answers into there for word or
  * sentence wise search,
@@ -35,7 +37,7 @@ public class QaForumApplication {
  *
  * Create docker image
  *
- * Configure logback.xml
+ * Configure logback.xml and proper logging
  *
  * Integrate datadog
  *

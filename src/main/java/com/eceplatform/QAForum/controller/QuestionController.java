@@ -17,14 +17,18 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-//    TODO : Get s3 signed URL for question image upload - > s3 key format (userId/questions/random_uuid) [GET URL -> /s3-key]
-//    TODO : Post a question with images [POST Body -> QuestionRequest] [Response -> 201 success]
-
-    @GetMapping
-    public String getString(){
-        return "Hello";
+//  Get s3 signed URL for question image upload - > s3 key format (questions/userId/random_uuid) [GET URL -> /s3-key]
+    @GetMapping("/s3-pre-signed-url")
+    public ResponseEntity getSignedUrl(){
+        try {
+            String url = questionService.getPresignedUploadRequestUrl();
+            return ResponseEntity.status(HttpStatus.OK).body(url);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
+//   Post a question with images [POST Body -> QuestionRequest] [Response -> 201 success]
     @PostMapping
     public ResponseEntity addQuestion(@Valid @RequestBody QuestionRequest questionRequest){
         try {
