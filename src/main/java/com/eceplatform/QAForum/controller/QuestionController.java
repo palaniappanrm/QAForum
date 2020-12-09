@@ -21,8 +21,9 @@ public class QuestionController {
     @GetMapping("/s3-pre-signed-url")
     public ResponseEntity getSignedUrl(){
         try {
-            String url = questionService.getPresignedUploadRequestUrl();
-            return ResponseEntity.status(HttpStatus.OK).body(url);
+            return ResponseEntity.status(HttpStatus.OK).body(questionService.getPresignedUploadRequestUrl());
+        } catch(ValidationException validationException){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(validationException.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

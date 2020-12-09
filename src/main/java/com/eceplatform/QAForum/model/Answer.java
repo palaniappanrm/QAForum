@@ -32,6 +32,9 @@ public class Answer {
     @Column(name = "MODIFIED_AT", nullable = false)
     private LocalDateTime modifiedAt;
 
+    @Column(name="ELASTIC_SEARCH_REF")
+    private String elasticSearchRef;
+
     public int getId() {
         return id;
     }
@@ -86,5 +89,13 @@ public class Answer {
 
     public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public String getElasticSearchRef() {
+        return elasticSearchRef;
+    }
+
+    public void setElasticSearchRef(String elasticSearchRef) {
+        this.elasticSearchRef = elasticSearchRef;
     }
 }
