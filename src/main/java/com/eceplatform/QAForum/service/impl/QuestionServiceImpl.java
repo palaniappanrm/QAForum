@@ -1,5 +1,8 @@
 package com.eceplatform.QAForum.service.impl;
 
+import com.amazonaws.HttpMethod;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.eceplatform.QAForum.aop.annotations.LoggedIn;
 import com.eceplatform.QAForum.dto.QuestionRequest;
 import com.eceplatform.QAForum.dto.UserDTO;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +34,9 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     @Qualifier("userThreadLocal")
     private ThreadLocalUtil<UserDTO> userThreadLocal;
+
+    @Autowired
+    private AmazonS3 amazonS3;
 
     @Override
     @LoggedIn
@@ -53,5 +61,23 @@ public class QuestionServiceImpl implements QuestionService {
             throw new RuntimeException("Invalid user");
         }
 
+    }
+
+    @Override
+    @LoggedIn
+    public String getPresignedUploadRequestUrl() {
+
+        User user = userRepository.findById(userThreadLocal.getValue().getId()).orElse(null);
+
+        Date expiration = new Date();
+        long expTimeMillis = expiration.getTime();
+        expTimeMillis += 600000; // 10 minutes
+        expiration.setTime(expTimeMillis);
+
+        GeneratePresignedUrlRequest generatePresignedUrlRequest =
+                new GeneratePresignedUrlRequest("qa-forum", "questions/" + user.getId() + "/" + UUID.randomUUID().toString())
+                        .withMethod(HttpMethod.PUT)
+                        .withExpiration(expiration);
+        return amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString();
     }
 }
