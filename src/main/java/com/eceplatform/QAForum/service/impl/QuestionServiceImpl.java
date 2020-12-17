@@ -92,7 +92,7 @@ public class QuestionServiceImpl implements QuestionService {
 
             String uuid = UUID.randomUUID().toString();
             GeneratePresignedUrlRequest generatePresignedUrlRequest =
-                    new GeneratePresignedUrlRequest("qa-forum", "questions/" + user.getId() + "/" + UUID.randomUUID().toString())
+                    new GeneratePresignedUrlRequest("qa-forum", "questions/" + user.getId() + "/" + uuid)
                             .withMethod(HttpMethod.PUT)
                             .withExpiration(expiration);
             return new S3KeyResponse(amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString(), uuid);

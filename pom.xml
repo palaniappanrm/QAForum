@@ -19,6 +19,9 @@
         <java.version>1.8</java.version>
         <akka.version>2.5.13</akka.version>
         <scala.binary.version>2.12</scala.binary.version>
+        <springfox.version>2.9.2</springfox.version>
+        <jaspyt.version>2.0.0</jaspyt.version>
+        <aws.sdk.version>1.11.920</aws.sdk.version>
     </properties>
 
     <dependencies>
@@ -68,7 +71,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.11.911</version>
+            <version>${aws.sdk.version}</version>
         </dependency>
 
         <dependency>
@@ -82,6 +85,37 @@
             <artifactId>elasticsearch</artifactId>
             <version>7.9.0</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot</artifactId>
+            <version>${jaspyt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-secretsmanager</artifactId>
+            <version>${aws.sdk.version}</version>
+        </dependency>
+
 
     </dependencies>
 
