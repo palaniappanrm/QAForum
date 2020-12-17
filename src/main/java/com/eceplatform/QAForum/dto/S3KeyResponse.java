@@ -6,6 +6,11 @@ public class S3KeyResponse {
 
     private String s3Key;
 
+    public S3KeyResponse(String signedUrl, String s3Key) {
+        this.signedUrl = signedUrl;
+        this.s3Key = s3Key;
+    }
+
     public String getSignedUrl() {
         return signedUrl;
     }

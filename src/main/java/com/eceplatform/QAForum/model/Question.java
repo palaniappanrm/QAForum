@@ -35,6 +35,9 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<QuestionImage> images;
 
+    @Column(name="ELASTIC_SEARCH_REF")
+    private String elasticSearchRef;
+
     public int getId() {
         return id;
     }
@@ -97,5 +100,13 @@ public class Question {
 
     public void setImages(List<QuestionImage> images) {
         this.images = images;
+    }
+
+    public String getElasticSearchRef() {
+        return elasticSearchRef;
+    }
+
+    public void setElasticSearchRef(String elasticSearchRef) {
+        this.elasticSearchRef = elasticSearchRef;
     }
 }
