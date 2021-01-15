@@ -3,6 +3,8 @@ package com.eceplatform.QAForum;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+// Hi there
+
 @SpringBootApplication
 public class QaForumApplication {
     public static void main(String[] args) {
